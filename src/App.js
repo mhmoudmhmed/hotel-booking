@@ -1,23 +1,28 @@
-import React from 'react';
-import Home from './pages/Home';
-import Room from './pages/Room';
-import SingleRoom from './pages/SingleRoom';
+import React, {Suspense, lazy} from 'react';
 import Error from './pages/error';
 import Navbar from './Components/Navbar';
-import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
+
+const Home = lazy(() => import('./pages/Home'));
+const Room = lazy(() => import('./pages/Room'));
+const SingleRoom = lazy(() => import('./pages/SingleRoom'));
 
 function App() {
   return (
     <div className="App">
       <>
-        <Navbar />
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/rooms/" component={Room} />
-          <Route exact path="/rooms/:name" component={SingleRoom} />
-          <Route component={Error} />
-        </Switch>
+        <Suspense fallback={<div className="loading">Loading.........</div>}>
+          <Router>
+            <Navbar />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/rooms/" component={Room} />
+              <Route exact path="/rooms/:name" component={SingleRoom} />
+              <Route component={Error} />
+            </Switch>
+          </Router>
+        </Suspense>
       </>
     </div>
   );

@@ -23,6 +23,12 @@ body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   line-height: 1.4;
 }
+.loading {
+  height: 100vh;
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+}
 h1 {
   font-size: 3em;
   line-height: 1;
